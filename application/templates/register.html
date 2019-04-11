@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block content %}
+    <div class="container opak register">
+        <div class="jumbotron ">
+
+			<h2 class="text-danger deneme" style="text-align:center; font-size:2.5vw;">REGISTER & JOIN US</h2>
+			<form method="POST" action="">
+                <dl>
+                    {{wtf.quick_form(form)}}
+                    <input class="btn btn-primary" type="submit" value="Register">
+                </dl>
+				<a href="{{ url_for('login') }}" style="color:blue">Do you have an account? Click to login.</a>
+			</form>
+		</div>
+    </div>
+{% endblock content %}
