@@ -8,15 +8,16 @@ body{
 
 }
 
-
 .login{
+    min-width: 400px;
     width:30%;
     margin-top:8em;
     opacity:0.90;
 }
 
 .register{
-    width:60%;
+    width:30%;
+    min-width: 400px;
     margin-top:6em;
     opacity:0.90;
 }
