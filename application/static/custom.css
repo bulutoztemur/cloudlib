@@ -1,0 +1,28 @@
+body{
+    background-image: url("img/bg.jpg");
+	background-size: cover;
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+}
+
+.login{
+    min-width: 400px;
+    width:30%;
+    margin-top:8em;
+    opacity:0.90;
+}
+
+.register{
+    width:30%;
+    min-width: 400px;
+    margin-top:6em;
+    opacity:0.90;
+}
+
+.deneme{
+    margin-top:-1em;
+}
+
+
+
