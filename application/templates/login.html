@@ -5,6 +5,15 @@
     <div class="container login">
         <div class="jumbotron ">
             <h2 class="text-danger deneme" style="text-align:center; font-size:2.5vw;">LOGIN & DISCOVER</h2>
+            {% with messages = get_flashed_messages() %}
+       {% if messages %}
+       <ul>
+           {% for message in messages %}
+              <li style="color:red">{{ message }}</li>
+           {% endfor %}
+       </ul>
+       {% endif %}
+       {% endwith %}
             <form method="POST" action="">
                 <dl>
                     {{wtf.quick_form(form)}}
