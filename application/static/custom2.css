@@ -24,6 +24,8 @@ body{
     margin-top:-1em;
 }
 
-.topnav-right {
-  float: right;
+.nav-item
+{
+  font-size: 20px !important;
 }
+
