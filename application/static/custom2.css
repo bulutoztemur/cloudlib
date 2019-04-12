@@ -24,5 +24,6 @@ body{
     margin-top:-1em;
 }
 
-
-
+.topnav-right {
+  float: right;
+}
