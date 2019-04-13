@@ -71,7 +71,7 @@ class Book(db.Model):
     deleted = db.Column(db.Boolean, default=False)
 
     def __repr__(self):
-        return f"Book('{self.bookname}', '{self.date_of_issue}', '{self.image_book}')"
+        return f"Book('{self.book_name}', '{self.date_of_issue}', '{self.image_book}')"
 
 
 class Category(db.Model):

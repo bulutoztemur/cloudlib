@@ -1,7 +1,7 @@
 from flask import render_template, url_for, flash, redirect, request
 from application import app, db, bcrypt
 from application.forms import RegistrationForm, LoginForm
-from application.models import User
+from application.models import User, Book
 from flask_login import login_user, current_user, logout_user, login_required
 
 
@@ -49,4 +49,11 @@ def logout():
 @login_required
 def account():
     return render_template('account.html')
+
+
+@app.route("/books")
+@login_required
+def books():
+    books = Book.query.all()
+    return render_template('books.html', books=books)
 
