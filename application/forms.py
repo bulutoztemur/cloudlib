@@ -13,7 +13,6 @@ class RegistrationForm(FlaskForm):
     confirm_password = PasswordField('Confirm Password', validators=[DataRequired(),
                                                                      EqualTo('password', message='Passwords must match')])
 
-
     def validate_username(self, username):
         user = User.query.filter_by(username=username.data).first()
         if user:
