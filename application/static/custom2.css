@@ -35,12 +35,5 @@ a:hover {
 }
 
 
-@media screen and (max-width:767px) {
-td, th {
-  border: 1px solid black !important;
-}
-    table tr > *{
-        display: block;
-    }
-}
+
 
