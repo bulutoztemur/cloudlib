@@ -11,7 +11,8 @@ import os
 
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = '\x1f\xeb\xda\xbe\xbd1\xd8\xda\xcf\xc5\xa6e]vQ_k.\xe0\x82\x9a\xea\xe6\xc1'
+S_KEY = os.environ.get('SEC_KEY', None)
+app.config['SECRET_KEY'] = S_KEY
 DB_URL = os.environ.get('DATABASE_URL', None)
 app.config['SQLALCHEMY_DATABASE_URI'] = DB_URL
 db = SQLAlchemy(app)
