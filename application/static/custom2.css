@@ -92,9 +92,4 @@ table.dataTable thead .sorting_desc_disabled:after {
   margin-bottom: 20px;
 }
 
-.account{
-    min-width: 500px;
-    width:50%;
-    margin-top:8em;
-    opacity:0.90;
-}
+
