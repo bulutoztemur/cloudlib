@@ -6,6 +6,11 @@ body{
 	background-attachment: fixed;
 }
 
+.thead-red{
+	background-color:red;
+	color: white;
+}
+
 .login{
     min-width: 400px;
     width:30%;
