@@ -3,7 +3,7 @@
 
 {% block content %}
     <div class="container login">
-        <div class="jumbotron ">
+        <div class="jumbotron overflow-auto">
             <h2 class="text-danger deneme" style="text-align:center; font-size:3vw;">LOGIN & DISCOVER</h2>
             {% with messages = get_flashed_messages(category_filter=["danger"]) %}
             {% if messages %}
