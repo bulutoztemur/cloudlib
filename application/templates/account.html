@@ -4,14 +4,18 @@
 <div class="container account" style="opacity:0.90">
     <div class="jumbotron" >
     <div class="content-section">
-      <div class="media" style="width:100%">
+      <div class="media">
+          <div class="col-3">
         <img class="rounded-circle account-img" src="{{ image_file }}">
+          </div>
+          <div class="col-9">
         <div class="media-body">
             <h2 class="account-heading">{{ current_user.name }}</h2>
           <h4 class="account-heading">{{ current_user.username }}</h4>
           <p class="text-secondary">{{ current_user.email }}</p>
             <p class="text-secondary">{{ current_user.mobile_phone }}</p>
         </div>
+      </div>
       </div>
     </div>
    <form method="POST" action="" enctype="multipart/form-data">
