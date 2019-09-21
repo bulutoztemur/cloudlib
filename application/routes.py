@@ -96,3 +96,8 @@ def books():
     return render_template('books.html', books=books)
 
 
+@app.route("/book/<book_id>")
+@login_required
+def book(book_id):
+    book = Book.query.filter_by(id=book_id).first()
+    return render_template('book.html', book=book)

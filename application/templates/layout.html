@@ -16,6 +16,11 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='datatables.min.js') }}"></script>
 
+    <style>
+        tr[data-href]{
+            cursor:pointer;
+        }
+    </style>
 </head>
 <body>
     <nav class="navbar navbar-expand-sm bg-danger navbar-dark static-top navbar-fixed-top device-fixed-width" style="opacity:0.9">

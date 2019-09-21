@@ -1,3 +1,31 @@
 {% extends "layout.html" %}
 
 {% block content %}
+
+<div class="container" style="opacity:0.90">
+    <div class="jumbotron account">
+        <div class="container">
+            <img src="{{ url_for('static', filename='book_pics/' + book.image_book) }}" alt="" border="5" height=150 width=120 style="margin-bottom:30px">
+        </div>
+        <div class="container">
+            <label> Book name <h2>{{book.book_name}}</h2></label><br>
+            <label> Author <h2>{% for author in book.authors %}
+            {{ author.author_name }}
+            {% endfor %}</h2></label><br>
+            <label>Category <h3>{% for category in book.categories %}
+            {{ category.category_name }}
+            {% endfor %}</h3></label><br>
+            <label>Date of issue<h3>{{ book.date_of_issue }}</h3> </label><br>
+            <label>Number of comments <h3>{{ book.comments|length }}</h3></label><br>
+            <label>Point <h3>{{book.points }} / 10</h3></label>
+        </div>
+
+
+
+
+    </div>
+</div>
+
+
+
+{% endblock content %}

@@ -3,9 +3,10 @@
 
 {% block content %}
     <div class="container opak register">
-        <div class="jumbotron ">
-
-			<h2 class="text-danger deneme" style="text-align:center; font-size:2.5vw;">REGISTER & JOIN US</h2>
+        <div class="jumbotron overflow-auto">
+            <div class="container">
+			    <h3 class="text-danger" style="text-align:center;">REGISTER & JOIN US</h3>
+            </div>
 			<form method="POST" action="">
                 <dl>
                     {{wtf.quick_form(form)}}
