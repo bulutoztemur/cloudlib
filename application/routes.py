@@ -72,7 +72,7 @@ def account():
     if form.validate_on_submit():
         if form.picture.data:
             picture_file = save_picture(form.picture.data)
-            current_user.image_file = picture_file
+            current_user.image_user = picture_file
         current_user.username = form.username.data
         current_user.email = form.email.data
         current_user.mobile_phone = form.mobile_phone.data
@@ -101,3 +101,5 @@ def books():
 def book(book_id):
     book = Book.query.filter_by(id=book_id).first()
     return render_template('book.html', book=book)
+
+

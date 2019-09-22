@@ -20,6 +20,8 @@ body{
 
 
 
+
+
 .nav-item
 {
   font-size: 20px !important;
@@ -100,3 +102,11 @@ table.dataTable thead .sorting_desc_disabled:after {
     opacity:0.90;
 }
 
+.labelbook{
+    color:red;
+    opacity:0.80;
+}
+
+.objectbook{
+    color:black;
+}
