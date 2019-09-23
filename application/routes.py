@@ -1,10 +1,10 @@
 import os
-import secrets
+from datetime import datetime
 from PIL import Image
 from flask import render_template, url_for, flash, redirect, request
 from application import app, db, bcrypt
-from application.forms import RegistrationForm, LoginForm, UpdateAccountForm
-from application.models import User, Book, Login
+from application.forms import RegistrationForm, LoginForm, UpdateAccountForm, CommentForm
+from application.models import User, Book, Login, Comment
 from flask_login import login_user, current_user, logout_user, login_required
 
 
@@ -52,7 +52,8 @@ def logout():
 
 
 def save_picture(form_picture):
-    random_hex = secrets.token_hex(8)
+    '''random_hex = secrets.token_hex(16)'''
+    random_hex = datetime.now().strftime("%m%d%Y%H%M%S%f")
     _, f_ext = os.path.splitext(form_picture.filename)
     picture_fn = random_hex + f_ext
     picture_path = os.path.join(app.root_path, 'static/profile_pics', picture_fn)
@@ -65,6 +66,10 @@ def save_picture(form_picture):
     return picture_fn
 
 
+def del_picture(filename):
+    os.remove(os.path.join(app.root_path, 'static/profile_pics', filename))
+
+
 @app.route("/account", methods=['GET', 'POST'])
 @login_required
 def account():
@@ -72,7 +77,10 @@ def account():
     if form.validate_on_submit():
         if form.picture.data:
             picture_file = save_picture(form.picture.data)
+            old_picture_file = current_user.image_user
             current_user.image_user = picture_file
+            if picture_file != "default.jpg":
+                del_picture(old_picture_file)
         current_user.username = form.username.data
         current_user.email = form.email.data
         current_user.mobile_phone = form.mobile_phone.data
@@ -96,10 +104,17 @@ def books():
     return render_template('books.html', books=books)
 
 
-@app.route("/book/<book_id>")
+@app.route("/book/<book_id>",methods=['GET', 'POST'])
 @login_required
 def book(book_id):
+    form = CommentForm()
+    if form.validate_on_submit():
+        comment = Comment(user_id=current_user.id, book_id=book_id, content=form.comment.data)
+        db.session.add(comment)
+        db.session.commit()
+        return redirect(url_for('book',book_id=book_id))
     book = Book.query.filter_by(id=book_id).first()
-    return render_template('book.html', book=book)
+    comments = Comment.query.filter_by(book_id=book.id)
+    return render_template('book.html', book=book, comments=comments, form=form)
 
 

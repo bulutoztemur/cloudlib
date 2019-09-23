@@ -21,6 +21,19 @@ users_authors_association = db.Table(
 )
 
 
+comments_users_association = db.Table(
+    'comments_users',
+    db.Column('comment_id', db.Integer, db.ForeignKey('comment.id')),
+    db.Column('user_id', db.Integer, db.ForeignKey('user.id'))
+)
+
+comments_books_association = db.Table(
+    'comments_books',
+    db.Column('comment_id', db.Integer, db.ForeignKey('comment.id')),
+    db.Column('book_id', db.Integer, db.ForeignKey('book.id'))
+)
+
+
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(60), nullable=False)
@@ -93,7 +106,7 @@ class Author(db.Model):
 
 
 class Comment(db.Model):
-    __table_args__ = (db.UniqueConstraint('user_id', 'book_id', name='unique_user_book'),)
+    '''__table_args__ = (db.UniqueConstraint('user_id', 'book_id', name='unique_user_book'),)'''
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     book_id = db.Column(db.Integer, db.ForeignKey('book.id'), nullable=False)

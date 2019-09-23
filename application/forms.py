@@ -67,3 +67,5 @@ class UpdateAccountForm(FlaskForm):
                 raise ValidationError('That mobile phone number is taken. Please choose a different one')
 
 
+class CommentForm(FlaskForm):
+    comment = StringField('Comment', validators=[DataRequired(), Length(min=1, max=200)])
