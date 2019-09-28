@@ -2,12 +2,19 @@
 {% import "bootstrap/wtf.html" as wtf %}
 
 {% block content %}
-
 <div class="container" style="opacity:0.90;max-width: 500px;">
     <div class="jumbotron account">
         <div class="container">
             <img src="{{ url_for('static', filename='book_pics/' + book.image_book) }}" alt="" border="5" height=150 width=120 style="margin-bottom:30px">
+            <div class="stars" data-rating="{{data_rat}}">
+                <span class="star">&nbsp;</span>
+                <span class="star">&nbsp;</span>
+                <span class="star">&nbsp;</span>
+                <span class="star">&nbsp;</span>
+                <span class="star">&nbsp;</span>
+            </div>
         </div>
+
         <div class="container">
             <label class="labelbook"> Book name <h4 class="objectbook">{{book.book_name}}</h4></label><br>
             <label class="labelbook"> Author <h4 class="objectbook">{% for author in book.authors %}
@@ -18,7 +25,16 @@
             {% endfor %}</h4></label><br>
             <label class="labelbook">Date of issue<h4 class="objectbook">{{ book.date_of_issue }}</h4> </label><br>
             <label class="labelbook">Number of comments <h4 class="objectbook">{{ book.comments|length }}</h4></label><br>
-            <label class="labelbook">Point <h4 class="objectbook">{{book.points }} / 10</h4></label>
+            <label class="labelbook">Point <h4 class="objectbook">
+                {% if (book.points|length) != 0 %}
+                    {{ ((book.points|sum(attribute='point'))/ (book.points|length))|round(1, 'floor') }} ({{ book.points|length }})
+                {% endif %}
+                {% if (book.points|length) == 0 %}
+                     0.0 (0)
+                {% endif %}
+
+            </h4></label>
+
         </div>
     </div>
 </div>
@@ -58,15 +74,77 @@
         </div>
         {% for comment in comments %}
         <div class="container">
-            <div class="jumbotron" style="background-color:lightblue;padding:20px">
-                <h4>{{comment.content}}</h4>
-                <p style="text-align:right;margin-bottom:0px">{{comment.user.username}}</p>
-                <p style="text-align:right">{{comment.creation_time}}</p>
-            </div>
+                <div class="speech-bubble">
+                    <p>{{comment.content}}</p>
+                    <p style="text-align:right">{{comment.user.username}}</br>{{func(str(comment.creation_time))}}</p>
+                </div>
+
         </div>
         {% endfor %}
     </div>
 </div>
 
+<script>
+
+a=0;
+
+document.addEventListener('DOMContentLoaded', function(){
+  addListeners();
+  setRating(); //based on value inside the div
+});
+
+function addListeners(){
+  var stars = document.querySelectorAll('.star');
+  [].forEach.call(stars, function(star, index){
+    star.addEventListener('click', (function(idx){
+      console.log('adding rating on', index);
+      document.querySelector('.stars').setAttribute('data-rating',  idx + 1);
+      console.log('Rating is now', idx+1);
+      setRating();
+    }).bind(window,index) );
+  });
+
+}
+
+function setRating(){
+  var stars = document.querySelectorAll('.star');
+  var rating = parseInt( document.querySelector('.stars').getAttribute('data-rating') );
+  [].forEach.call(stars, function(star, index){
+    if(rating > index){
+      star.classList.add('rated');
+      console.log('added rated on', index );
+    }else{
+      star.classList.remove('rated');
+      console.log('removed rated on', index );
+    }
+  });
+  if(a>0){
+    printRate();
+  }
+  a=a+1;
+
+}
+
+
+
+function printRate(){
+    var x = document.getElementsByClassName('stars')[0].getAttribute('data-rating')
+          $.ajax({
+                url: "/book/"+1,
+                data: ({point: x}),
+                async:false,
+                success: function(response) {
+                    console.log(response);
+                },
+                error: function(err) {
+                    console.log(err);
+                }
+            });
+    location.reload();
+}
+
+
+</script>
 
 {% endblock content %}
+

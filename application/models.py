@@ -21,18 +21,6 @@ users_authors_association = db.Table(
 )
 
 
-comments_users_association = db.Table(
-    'comments_users',
-    db.Column('comment_id', db.Integer, db.ForeignKey('comment.id')),
-    db.Column('user_id', db.Integer, db.ForeignKey('user.id'))
-)
-
-comments_books_association = db.Table(
-    'comments_books',
-    db.Column('comment_id', db.Integer, db.ForeignKey('comment.id')),
-    db.Column('book_id', db.Integer, db.ForeignKey('book.id'))
-)
-
 
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
@@ -78,7 +66,7 @@ class Book(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     book_name = db.Column(db.String(200), nullable=False)
     date_of_issue = db.Column(db.Integer)
-    image_book = db.Column(db.String(20), nullable=False, default='default.jpg')
+    image_book = db.Column(db.String(36), nullable=False, default='default.jpg')
     authors = db.relationship("Author", secondary=books_authors_association, backref='books')
     categories = db.relationship("Category", secondary=books_categories_association, backref='books')
     deleted = db.Column(db.Boolean, default=False)
@@ -121,13 +109,13 @@ class Comment(db.Model):
 
 
 class Point(db.Model):
+    __table_args__ = (db.UniqueConstraint('user_id', 'book_id', name='unique_user_book'),)
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     book_id = db.Column(db.Integer, db.ForeignKey('book.id'), nullable=False)
     point = db.Column(db.Integer, nullable=False)
     user = db.relationship(User, backref=db.backref("points", cascade="all, delete-orphan"))
     book = db.relationship(Book, backref=db.backref("points", cascade="all, delete-orphan"))
-    db.UniqueConstraint('user_id', 'book_id', name='unique_user_book')
 
     def __repr__(self):
         return f"Point('{self.point}')"

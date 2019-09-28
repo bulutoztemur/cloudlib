@@ -32,8 +32,8 @@ class RegistrationForm(FlaskForm):
 
 
 class LoginForm(FlaskForm):
-    email = StringField('Email',
-                        validators=[DataRequired(), Email()])
+    emailOrUsername = StringField('Email or Username',
+                        validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired(), Length(min=8, max=20)])
     remember = BooleanField('Remember Me')
 
@@ -68,4 +68,4 @@ class UpdateAccountForm(FlaskForm):
 
 
 class CommentForm(FlaskForm):
-    comment = StringField('Comment', validators=[DataRequired(), Length(min=1, max=200)])
+    comment = StringField('', validators=[DataRequired(), Length(min=1, max=200)], default="Make a comment!!!")

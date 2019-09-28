@@ -3,7 +3,7 @@
 {% block content %}
 <div class="container" style="margin-top:4em; opacity:0.90">
     <div class="jumbotron" style="overflow-x:auto;">
-    <h1 style="text-align:center; font-size:42pt; color:red;text-shadow: 3px 3px #000000;opacity:0.9"><i>BOOKS</i></h1>
+    <h1 style="text-align:center; font-size:48pt;text-shadow: 3px 3px #000000; color:red;opacity:0.9">BOOKS</h1>
         <table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
             <thead class="thead-dark">
                 <tr>
@@ -12,11 +12,12 @@
                     <th>Author Name</th>
                     <th>Categories</th>
                     <th>Date</th>
-                    <th>Number of Comments</th>
+                    <th>Comments</th>
                     <th>Point</th>
                 </tr>
             </thead>
             <tbody>
+
                 {% for book in books %}
                 <tr class='clickable-row' data-href="{{ url_for('book',book_id=book.id) }}">
                     <td><img src="{{ url_for('static', filename='book_pics/' + book.image_book) }}" alt="" border=0 height=100 width=100></td>
@@ -29,7 +30,13 @@
                     {% endfor %}</td>
                     <td>{{ book.date_of_issue }}</td>
                     <td>{{ book.comments|length }}</td>
-                    <td></td>
+                    {% if (book.points|length) != 0 %}
+                    <td>{{ ((book.points|sum(attribute='point'))/ (book.points|length))|round(1, 'floor') }} ({{ book.points|length }}) </td>
+                    {% endif %}
+                    {% if (book.points|length) == 0 %}
+                    <td> 0.0 (0) </td>
+                    {% endif %}
+
                 </tr>
                 {% endfor %}
             </tbody>
