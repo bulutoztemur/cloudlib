@@ -7,23 +7,23 @@
     <div class="jumbotron account">
         <div class="container" style="display:inline-block">
             <img src="{{ url_for('static', filename='book_pics/' + book.image_book) }}" alt="" border="5" height=150 width=100 style="margin-bottom:30px;" align="left">
-                <div class="container" style="margin-left:120px" >
-                    <p class="labelbook" style="margin-bottom:-8px;">Give points over 5:</p>
-                    <div class="stars" data-rating="{{data_rat}}" >
+                <div class="container">
+                    <p class="labelbook" style="margin-left:100px;margin-bottom:-8px;">Give points over 5:</p>
+                    <div class="stars" data-rating="{{data_rat}}" style="margin-left:100px">
                         <span class="star">&nbsp;</span>
                         <span class="star">&nbsp;</span>
                         <span class="star">&nbsp;</span>
                         <span class="star">&nbsp;</span>
                         <span class="star">&nbsp;</span>
                     </div>
-                    <label class="labelbook">Average Point <h4 class="objectbook">
+                    <label class="labelbook" style="margin-left:15px">Average Point <h4 class="objectbook">
                         {% if (book.points|length) != 0 %}
                             {{ ((book.points|sum(attribute='point'))/ (book.points|length))|round(1, 'floor') }} ({{ book.points|length }})
                         {% endif %}
                         {% if (book.points|length) == 0 %}
                             0.0 (0)
                         {% endif %}
-            </h4></label>
+                    </h4></label>
                 </div>
         </div>
         <div class="container">
@@ -35,7 +35,7 @@
             {{ category.category_name }}
             {% endfor %}</h4></label><br>
             <label class="labelbook">Date of issue<h4 class="objectbook">{{ book.date_of_issue }}</h4> </label><br>
-            <label class="labelbook">Number of comments <h4 class="objectbook">{{ book.comments|length }}</h4></label>
+            <label class="labelbook">Comments <h4 class="objectbook">{{ book.comments|length }}</h4></label>
         </div>
     </div>
 </div>
