@@ -68,4 +68,4 @@ class UpdateAccountForm(FlaskForm):
 
 
 class CommentForm(FlaskForm):
-    comment = StringField('', validators=[DataRequired(), Length(min=1, max=200)], default="Make a comment!!!")
+    comment = StringField('', validators=[DataRequired(), Length(min=1, max=200)], render_kw={"placeholder": "Make a comment!!!"})
