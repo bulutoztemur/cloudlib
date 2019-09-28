@@ -2,6 +2,7 @@
 {% import "bootstrap/wtf.html" as wtf %}
 
 {% block content %}
+
 <div class="container" style="opacity:0.90;max-width: 500px;">
     <div class="jumbotron account">
         <div class="container">
@@ -14,7 +15,6 @@
                 <span class="star">&nbsp;</span>
             </div>
         </div>
-
         <div class="container">
             <label class="labelbook"> Book name <h4 class="objectbook">{{book.book_name}}</h4></label><br>
             <label class="labelbook"> Author <h4 class="objectbook">{% for author in book.authors %}
