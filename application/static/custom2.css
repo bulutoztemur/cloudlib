@@ -6,6 +6,12 @@ body{
 	background-attachment: fixed;
 }
 
+a.nav-link:hover{
+  -webkit-border-radius: 8px; !important
+  -moz-border-radius: 8px; !important
+  border-radius: 8px; !important
+  }
+
 .star{
   color: goldenrod;
   font-size: 1.5rem;
@@ -38,9 +44,6 @@ body{
 }
 
 
-
-
-
 .nav-item
 {
   font-size: 20px !important;
@@ -48,7 +51,7 @@ body{
 
 a:hover {
   background-color: white;
-  color: red !important
+  color: red !important;
 }
 
 
@@ -124,27 +127,10 @@ table.dataTable thead .sorting_desc_disabled:after {
 
 }
 
-.account-heading {
-  font-size: 2em;
-}
-
-.content-section {
-  padding: 10px 20px;
-  border: 1px solid #dddddd;
-  border-radius: 3px;
-  margin-bottom: 20px;
-}
-
 .account{
     margin-top:100px;
 }
 
-.account2{
-    min-width: 400px;
-    width:50%;
-    margin-top:8em;
-    opacity:0.90;
-}
 
 .labelbook{
     color:red;

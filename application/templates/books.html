@@ -20,7 +20,7 @@
 
                 {% for book in books %}
                 <tr class='clickable-row' data-href="{{ url_for('book',book_id=book.id) }}">
-                    <td><img src="{{ url_for('static', filename='book_pics/' + book.image_book) }}" alt="" border=0 height=100 width=100></td>
+                    <td><img src="{{ url_for('static', filename='book_pics/' + book.image_book) }}" alt="" border=0 height=100 width=80></td>
                     <td>{{ book.book_name }}</td>
                     <td>{% for author in book.authors %}
                     {{ author.author_name }}

@@ -74,11 +74,9 @@
       </ul>
 
        <ul class="navbar-nav ml-auto">
-
-
-
            <li class="nav-item active">
-               <a class="nav-link" href="{{ url_for('account') }}">Account</a>
+               <a class="nav-link" href="{{ url_for('account') }}"><img class="rounded-circle" src="{{url_for('static', filename='profile_pics/' + current_user.image_user)}}"  height="25" width="25">
+Account</a>
             </li>
 
            <li class="nav-item active">
