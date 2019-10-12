@@ -12,7 +12,7 @@ from sqlalchemy import desc
 @app.route("/register", methods=['GET', 'POST'])
 def register():
     if current_user.is_authenticated:
-        return redirect(url_for('account'))
+        return redirect(url_for('home'))
     form = RegistrationForm()
     if form.validate_on_submit():
         hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
@@ -29,7 +29,7 @@ def register():
 @app.route("/login", methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for('account'))
+        return redirect(url_for('home'))
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.emailOrUsername.data.lower()).first()
@@ -41,7 +41,7 @@ def login():
             db.session.add(user_login)
             db.session.commit()
             next_page = request.args.get('next')
-            return redirect(next_page) if next_page else redirect(url_for('account'))
+            return redirect(next_page) if next_page else redirect(url_for('home'))
         else:
             flash('Login unsuccessful. Please check email and password', 'danger')
     return render_template('login.html', form=form)
@@ -52,6 +52,26 @@ def login():
 def logout():
     logout_user()
     return redirect(url_for('login'))
+
+
+@app.route("/home")
+@login_required
+def home():
+    user = User.query.filter_by(id=current_user.id).first()
+    books = user.fav_books
+    points_list=[]
+    points_count =[]
+    point_total=0
+    for book in books:
+        for p in book.points:
+            point_total += p.point
+        if len(book.points) != 0:
+            point_avg = (point_total / len(book.points))
+        else:
+            point_avg = 0
+        points_list.append(point_avg)
+        points_count.append(len(book.points))
+    return render_template('home.html', books=books, points_list=points_list, points_count=points_count)
 
 
 def save_picture(form_picture):
@@ -82,7 +102,7 @@ def account():
             picture_file = save_picture(form.picture.data)
             old_picture_file = current_user.image_user
             current_user.image_user = picture_file
-            if picture_file != "default.jpg":
+            if old_picture_file != "default.jpg":
                 del_picture(old_picture_file)
         current_user.username = form.username.data
         current_user.email = form.email.data

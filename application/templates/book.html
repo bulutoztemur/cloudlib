@@ -129,9 +129,10 @@ function setRating(){
 
 
 function printRate(){
+    var url_book_id = (window.location.pathname).substr(6);
     var x = document.getElementsByClassName('stars')[0].getAttribute('data-rating')
           $.ajax({
-                url: "/book/"+1,
+                url: "/book/"+url_book_id,
                 data: ({point: x}),
                 async:false,
                 success: function(response) {

@@ -12,6 +12,14 @@ a.nav-link:hover{
   border-radius: 8px; !important
   }
 
+a.navbar-brand:hover{
+  -webkit-border-radius: 8px; !important
+  -moz-border-radius: 8px; !important
+  border-radius: 8px; !important
+  }
+
+
+
 .star{
   color: goldenrod;
   font-size: 1.5rem;
